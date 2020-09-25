@@ -10,6 +10,7 @@ public class FData {
     private static final List<String> surnames = Arrays.asList("Petrov", "Vasiliev", "Durov", "Titov");
     private static final List<String> phoneNumbers = Arrays.asList("+380687751468", "+380687771111", "0685551111", "0994442222");
     private static final List<String> materials = Arrays.asList("Sosna 4m", "Brus 20x20", "Dranka 25mm", "Gorbil");
+    private static int prevRandomId = -1;
 
     public static String getName(){return names.get(rand.nextInt(names.size()));}
 
@@ -17,7 +18,15 @@ public class FData {
 
     public static String getPhone(){return phoneNumbers.get(rand.nextInt(phoneNumbers.size()));}
 
-    public static String getMaterial(){return materials.get(rand.nextInt(materials.size()));}
+    public static String getMaterial() {
+        int nextRandId = rand.nextInt(materials.size());
+        if (nextRandId == prevRandomId)
+            return getMaterial();
+        else {
+            prevRandomId = nextRandId;
+            return materials.get(nextRandId);
+        }
+    }
 
     public static double getVolume(){return rand.nextDouble() * 10.0;}
 

@@ -22,6 +22,7 @@ public class ProductionTest {
 
     public void createSingleProductProduction() throws IOException {
         materialTest.getRandomMaterial();
+
         Request post = Request.builder()
                 .type(new HttpPost(endPoint))
                 .body(new ProductionPayload(materialTest.getRandomMaterial().toStoragePayload(),

@@ -12,19 +12,21 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MaterialTest {
+    private String prevRandomId = "";
+
     private final String endPoint = "http://localhost:8080/api/materials";
 
     private final Random rand = new Random();
 
-    public void createMaterials(int materialsNumber){
-        for (int i=0; i<materialsNumber; i++){
+    public void createMaterials(int materialsNumber) {
+        for (int i = 0; i < materialsNumber; i++) {
             Request post = Request.builder()
                     .type(new HttpPost(endPoint))
                     .body(new MaterialPayload(FData.getMaterial(), FData.getPrice()))
                     .response(Material.class).build();
-            try{
+            try {
                 Logging.printObject(post.send(), "Creating Material");
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Material with this name already exist");
             }
         }
@@ -36,7 +38,14 @@ public class MaterialTest {
                 .body(null)
                 .response(Material[].class).build();
         Material[] materials = (Material[]) get.send();
-        return materials[rand.nextInt(materials.length)];
+        Material nextMaterial = materials[rand.nextInt(materials.length)];
+        if (nextMaterial.getMaterial_id().equals(prevRandomId))
+            return getRandomMaterial();
+        else {
+            prevRandomId = nextMaterial.getMaterial_id();
+            return nextMaterial;
+        }
+
     }
 
     public Material[] getAllMaterials() throws IOException {
@@ -47,7 +56,7 @@ public class MaterialTest {
         return (Material[]) get.send();
     }
 
-    public void testService() throws IOException{
+    public void testService() throws IOException {
         System.out.println("Materials service testing".toUpperCase());
         createMaterials(3);
     }
