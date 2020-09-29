@@ -55,7 +55,7 @@ public class Request {
         return result;
     }
 
-    private String makeJson(){ Gson gson = new Gson(); return gson.toJson(body); }
+    private String makeJson(){ Gson gson = new Gson(); System.out.println(gson.toJson(body)); return gson.toJson(body); }
 
     private Object makeObject(String json, Class objClass){
        Gson gson = new Gson(); return gson.fromJson(json, objClass);

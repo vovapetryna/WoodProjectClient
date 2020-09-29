@@ -23,11 +23,13 @@ public class ProductionTest {
     public void createSingleProductProduction() throws IOException {
         materialTest.getRandomMaterial();
 
+        UniPayload errorWorker = new UniPayload("2a4222b9-1e4a-46d8-8a17-dc0c587e8e84", 0.0);
+
         Request post = Request.builder()
                 .type(new HttpPost(endPoint))
                 .body(new ProductionPayload(materialTest.getRandomMaterial().toStoragePayload(),
                         new StoragePayload[]{materialTest.getRandomMaterial().toStoragePayload()},
-                        new UniPayload[]{workerTest.getRandomWorker().toUniPayload()}))
+                        new UniPayload[]{errorWorker}))
                 .response(Analysis.class).build();
         Logging.printObject(post.send(), "Adding single Production");
     }

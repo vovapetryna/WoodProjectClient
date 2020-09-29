@@ -28,7 +28,7 @@ public class ClientTest {
 
     public Client getRandomClient() throws IOException {
         Request get = Request.builder()
-                .type(new HttpGet(endPoint))
+                .type(new HttpGet(endPoint + "?page=0&size=1000"))
                 .body(null)
                 .response(Client[].class).build();
         Client[] clients = (Client[]) get.send();

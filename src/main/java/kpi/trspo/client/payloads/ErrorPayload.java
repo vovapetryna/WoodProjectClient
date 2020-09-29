@@ -6,5 +6,5 @@ import lombok.Data;
 public class ErrorPayload {
     private String timestamp;
     private String message;
-    private String details;
+    private String[] details;
 }

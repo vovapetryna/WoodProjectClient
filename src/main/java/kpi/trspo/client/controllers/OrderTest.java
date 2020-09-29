@@ -1,6 +1,5 @@
 package kpi.trspo.client.controllers;
 
-import kpi.trspo.client.models.Client;
 import kpi.trspo.client.models.Order;
 import kpi.trspo.client.payloads.OrderPayload;
 import kpi.trspo.client.requests.Request;

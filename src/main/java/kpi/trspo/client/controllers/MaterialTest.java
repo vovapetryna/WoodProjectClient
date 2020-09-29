@@ -34,7 +34,7 @@ public class MaterialTest {
 
     public Material getRandomMaterial() throws IOException {
         Request get = Request.builder()
-                .type(new HttpGet(endPoint))
+                .type(new HttpGet(endPoint + "?page=0&size=1000"))
                 .body(null)
                 .response(Material[].class).build();
         Material[] materials = (Material[]) get.send();
@@ -50,7 +50,7 @@ public class MaterialTest {
 
     public Material[] getAllMaterials() throws IOException {
         Request get = Request.builder()
-                .type(new HttpGet(endPoint))
+                .type(new HttpGet(endPoint + "?page=0&size=1000"))
                 .body(null)
                 .response(Material[].class).build();
         return (Material[]) get.send();

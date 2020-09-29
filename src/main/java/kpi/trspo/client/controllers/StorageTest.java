@@ -30,7 +30,7 @@ public class StorageTest {
 
     public StorageRecord getRandomRecord() throws IOException {
         Request get = Request.builder()
-                .type(new HttpGet(endPoint))
+                .type(new HttpGet(endPoint + "?page=0&size=1000"))
                 .body(null)
                 .response(StorageRecord[].class).build();
         StorageRecord[] storageRecords = (StorageRecord[]) get.send();

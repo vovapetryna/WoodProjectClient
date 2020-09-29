@@ -5,7 +5,6 @@ import kpi.trspo.client.payloads.WorkerPayload;
 import kpi.trspo.client.requests.Request;
 import kpi.trspo.client.utils.FData;
 import kpi.trspo.client.utils.Logging;
-import lombok.AllArgsConstructor;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
@@ -29,7 +28,7 @@ public class WorkerTest {
 
     public Worker getRandomWorker() throws IOException {
         Request get = Request.builder()
-                .type(new HttpGet(endPoint))
+                .type(new HttpGet(endPoint + "?page=0&size=1000"))
                 .body(null)
                 .response(Worker[].class).build();
         Worker[] workers = (Worker[]) get.send();
