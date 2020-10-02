@@ -1,12 +1,15 @@
 package kpi.trspo.client.controllers;
 
+import kpi.trspo.client.models.SalaryTransaction;
 import kpi.trspo.client.models.Worker;
+import kpi.trspo.client.payloads.UniPayload;
 import kpi.trspo.client.payloads.WorkerPayload;
 import kpi.trspo.client.requests.Request;
 import kpi.trspo.client.utils.FData;
 import kpi.trspo.client.utils.Logging;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 
 import java.io.IOException;
 import java.util.Random;
@@ -35,8 +38,20 @@ public class WorkerTest {
         return workers[rand.nextInt(workers.length)];
     }
 
+    public void getMoney() throws IOException {
+        Worker worker = getRandomWorker();
+        UniPayload uniPayload = new UniPayload(worker.getWorker_id(), FData.getPrice());
+
+        Request put = Request.builder()
+                .type(new HttpPut(endPoint + "/get_money"))
+                .body(uniPayload)
+                .response(SalaryTransaction.class).build();
+        Logging.printObject(put.send(), "Getting money");
+    }
+
     public void testService() throws IOException{
         System.out.println("Worker service testing".toUpperCase());
         createWorkers(2);
+        getMoney();
     }
 }

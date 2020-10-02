@@ -1,6 +1,7 @@
 package kpi.trspo.client.controllers;
 
 import kpi.trspo.client.models.Analysis;
+import kpi.trspo.client.models.Worker;
 import kpi.trspo.client.payloads.ProductionPayload;
 import kpi.trspo.client.payloads.StoragePayload;
 import kpi.trspo.client.payloads.UniPayload;
@@ -23,13 +24,15 @@ public class ProductionTest {
     public void createSingleProductProduction() throws IOException {
         materialTest.getRandomMaterial();
 
-        UniPayload errorWorker = new UniPayload("2a4222b9-1e4a-46d8-8a17-dc0c587e8e84", 0.0);
+//        UniPayload workerPayload = new UniPayload("2a4222b9-1e4a-46d8-8a17-dc0c587e8e84", 0.0);
+        Worker worker = workerTest.getRandomWorker();
+        UniPayload workerPayload = new UniPayload(worker.getWorker_id(), 0.0);
 
         Request post = Request.builder()
                 .type(new HttpPost(endPoint))
                 .body(new ProductionPayload(materialTest.getRandomMaterial().toStoragePayload(),
                         new StoragePayload[]{materialTest.getRandomMaterial().toStoragePayload()},
-                        new UniPayload[]{errorWorker}))
+                        new UniPayload[]{workerPayload}))
                 .response(Analysis.class).build();
         Logging.printObject(post.send(), "Adding single Production");
     }
