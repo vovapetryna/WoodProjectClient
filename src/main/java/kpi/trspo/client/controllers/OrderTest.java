@@ -1,5 +1,6 @@
 package kpi.trspo.client.controllers;
 
+import kpi.trspo.client.models.Client;
 import kpi.trspo.client.models.Order;
 import kpi.trspo.client.payloads.OrderPayload;
 import kpi.trspo.client.requests.Request;
@@ -16,6 +17,7 @@ public class OrderTest {
     private final Random rand = new Random();
 
     private final MaterialTest materialTest = new MaterialTest();
+    private final ClientTest clientTest = new ClientTest();
 
     public void createOrders(int ordersNumber) throws IOException {
         for (int i=0; i<ordersNumber; i++){
@@ -23,7 +25,8 @@ public class OrderTest {
                     .type(new HttpPost(endPoint))
                     .body(new OrderPayload(materialTest.getRandomMaterial().getMaterial_id(),
                             FData.getVolume(),
-                            FData.getPrice()))
+                            FData.getPrice(),
+                            clientTest.getRandomClient().getClient_id()))
                     .response(Order.class).build();
             Logging.printObject(post.send(), "Creating Order");
         }

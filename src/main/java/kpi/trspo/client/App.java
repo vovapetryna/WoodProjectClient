@@ -16,12 +16,12 @@ public class App
             OrderTest orderTest = new OrderTest();
 
             workerTest.testService();
-//            clientTest.testService();
+            clientTest.testService();
             materialTest.testService();
-//            storageTest.testService();
+            storageTest.testService();
             priceTest.testService();
             productionTest.testService();
-//            orderTest.testService();
+            orderTest.testService();
         } catch (Exception e){
             System.out.println(e.toString());
         }

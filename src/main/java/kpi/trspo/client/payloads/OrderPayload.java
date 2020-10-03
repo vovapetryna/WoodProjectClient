@@ -9,4 +9,5 @@ public class OrderPayload {
     private String product;
     private double volume;
     private double price;
+    private String client;
 }

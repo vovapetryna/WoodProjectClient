@@ -9,4 +9,5 @@ public class Order {
     private Material product;
     private double volume;
     private double price;
+    private Client client;
 }
